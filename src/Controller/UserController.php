@@ -23,6 +23,7 @@ final class UserController extends AbstractController
     #[Route('/api/v1/users', name: 'api_v1_create_user', methods: ['POST'])]
     public function create(Request $request, EntityManagerInterface $em): JsonResponse
     {
+        $this->denyAccessUnlessGranted('ROLE_EDITOR');
         $data = json_decode($request->getContent(), true);
 
         $user = new User();

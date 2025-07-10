@@ -160,4 +160,19 @@ class User
 
         return $this;
     }
+
+    public function getRoles(): array
+    {
+        $roles = [];
+
+        foreach ($this->groups as $group) {
+            $roles[] = 'ROLE_' . strtoupper($group->getName());
+        }
+
+        // Guarantee at least one role (Symfony requires it)
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
 }
