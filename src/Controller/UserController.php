@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -11,12 +12,15 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class UserController extends AbstractController
 {
-    #[Route('/api/v1/users/:id', name: 'api_v1_fetch_user', methods: ['GET'])]
-    public function fetch(): JsonResponse
+    #[Route('/api/v1/users/{id}', name: 'api_v1_fetch_user', methods: ['GET'])]
+    public function fetch(Request $request, UserRepository $repository): JsonResponse
     {
+        $user = $repository->find($request->get('id'));
+
         return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/UserController.php',
+            'id' => $user->getId(),
+            'firstname' => $user->getFirstName(),
+            'lastname' => $user->getLastName(),
         ]);
     }
 
