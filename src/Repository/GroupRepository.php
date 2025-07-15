@@ -16,6 +16,15 @@ class GroupRepository extends ServiceEntityRepository
         parent::__construct($registry, Group::class);
     }
 
+    public function findOneByName(string $name): ?Group
+    {
+        return $this->createQueryBuilder('g')
+            ->where('LOWER(g.name) = :name')
+            ->setParameter('name', strtolower($name))
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     //    /**
     //     * @return Group[] Returns an array of Group objects
     //     */

@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
+
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -159,6 +160,21 @@ class User
         }
 
         return $this;
+    }
+
+    public function hasGroup(Group $group): bool
+    {
+        return ($this->groups->contains($group));
+    }
+
+    public function hasGroupName(string $name): bool
+    {
+        foreach ($this->groups as $group) {
+            if ($group->getName() === $name) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function getRoles(): array
