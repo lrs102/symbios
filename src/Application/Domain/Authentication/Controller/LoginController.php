@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controller;
+namespace App\Application\Domain\Authentication\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Annotation\Route;
 
 class LoginController extends AbstractController
 {

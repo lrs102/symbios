@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Entity;
+namespace App\Application\Domain\User\Entity;
 
-use App\Repository\UserRepository;
+use App\Application\Domain\Group\Entity\Group;
+use App\Application\Domain\User\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Validator\Constraints as Assert;
-
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
