@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Domain\Event;
+namespace App\Domain\Event;
 
 interface DomainEvent
 {

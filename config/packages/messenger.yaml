@@ -9,6 +9,6 @@ framework:
 
 
         routing:
-            'App\Domain\Event\DomainEvent': async
+            App\Domain\User\Event\UserCreated: async
             # Route your messages to the transports
             # 'App\Message\YourMessage': async

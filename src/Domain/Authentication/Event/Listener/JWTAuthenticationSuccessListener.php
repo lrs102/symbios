@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Application\Domain\Authentication\Event\Listener;
+namespace App\Domain\Authentication\Event\Listener;
 
-use App\Application\Domain\User\Entity\User;
+use App\Domain\User\Entity\User;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 

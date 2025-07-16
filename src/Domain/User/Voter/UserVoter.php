@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Application\Domain\User\Voter;
+namespace App\Domain\User\Voter;
 
-use App\Application\Domain\Group\Repository\GroupRepository;
-use App\Application\Domain\User\Entity\User;
+use App\Domain\Group\Repository\GroupRepository;
+use App\Domain\User\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -24,7 +24,7 @@ final class UserVoter extends Voter
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
         return in_array($attribute, [self::EDIT, self::VIEW])
-            && $subject instanceof \App\Application\Domain\User\Entity\User;
+            && $subject instanceof \App\Domain\User\Entity\User;
     }
 
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool

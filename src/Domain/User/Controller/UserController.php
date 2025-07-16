@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Application\Domain\User\Controller;
+namespace App\Domain\User\Controller;
 
-use App\Application\Domain\User\Entity\User;
-use App\Application\Domain\User\Repository\UserRepository;
+use App\Domain\User\Entity\User;
+use App\Domain\User\Event\UserCreated;
+use App\Domain\User\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -12,6 +13,12 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class UserController extends AbstractController
 {
+
+    public function __construct(
+        private EntityManagerInterface $em,
+        private MessageBusInterface $bus
+    ) {}
+
     #[Route('/api/v1/users/{id}', name: 'api_v1_fetch_user', methods: ['GET'])]
     public function fetch(Request $request, UserRepository $repository): JsonResponse
     {
@@ -41,6 +48,9 @@ final class UserController extends AbstractController
 
         $em->persist($user);
         $em->flush();
+
+        $event = new UserCreated($user->getId(), $user->getEmail());
+        $this->bus->dispatch($event);
 
         return $this->json([
             'id' => $user->getId(),
