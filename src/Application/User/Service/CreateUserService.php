@@ -1,19 +1,23 @@
 <?php
 
-namespace App\Application\User;
+namespace App\Application\User\Service;
 
 use App\Domain\User\Entity\User;
-use App\Domain\User\Event\UserCreated;
+use App\Domain\User\Event\UserCreated as UserCreatedEvent;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Messenger\Exception\ExceptionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-class CreateUserService
+readonly class CreateUserService
 {
     public function __construct(
-        private readonly EntityManagerInterface $em,
-        private readonly MessageBusInterface    $bus
+        private EntityManagerInterface $em,
+        private MessageBusInterface    $bus
     ) {}
 
+    /**
+     * @throws ExceptionInterface
+     */
     public function create(array $data): User
     {
         $user = new User();
@@ -28,7 +32,7 @@ class CreateUserService
         $this->em->persist($user);
         $this->em->flush();
 
-        $event = new UserCreated($user->getId(), $user->getEmail());
+        $event = new UserCreatedEvent($user->getId(), $user->getEmail());
         $this->bus->dispatch($event);
 
         return $user;

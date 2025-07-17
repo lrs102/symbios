@@ -6,7 +6,7 @@
 //use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 //use Symfony\Component\HttpFoundation\JsonResponse;
 //use Symfony\Component\HttpFoundation\Request;
-//use Symfony\Component\Security\Core\User\UserInterface;
+//use Symfony\Component\Security\Core\UserData\UserInterface;
 //
 //class JWTAuthenticationSuccessHandler extends AuthenticationSuccessHandler
 //{

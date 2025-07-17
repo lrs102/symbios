@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\User\Voter;
+namespace App\Infrastructure\Security\Voter;
 
 use App\Domain\Group\Repository\GroupRepository;
 use App\Domain\User\Entity\User;

@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Domain\User\Repository;
+namespace App\Infrastructure\Persistance\Doctrine\User;
 
 use App\Domain\User\Entity\User;
+use App\Domain\User\Repository\UserRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<User>
  */
-class UserRepository extends ServiceEntityRepository
+class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -17,7 +18,7 @@ class UserRepository extends ServiceEntityRepository
     }
 
     //    /**
-    //     * @return User[] Returns an array of User objects
+    //     * @return UserData[] Returns an array of UserData objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -31,7 +32,7 @@ class UserRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?User
+    //    public function findOneBySomeField($value): ?UserData
     //    {
     //        return $this->createQueryBuilder('u')
     //            ->andWhere('u.exampleField = :val')
@@ -40,4 +41,14 @@ class UserRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findByEmail(string $email): ?User
+    {
+        return $this->findOneBy(['email' => $email]);
+    }
+
+    public function findById(int $id): ?User
+    {
+        return $this->findOneBy(['id' => $id]);
+    }
 }
