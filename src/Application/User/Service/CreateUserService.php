@@ -2,17 +2,30 @@
 
 namespace App\Application\User\Service;
 
-use App\Domain\User\Repository\UserRepositoryInterface;
+use App\Application\Common\Event\EventDispatcherInterface;
+use App\Application\User\DTO\UserData;
+use App\Domain\User\Event\UserCreated;
 use App\Domain\User\User;
 
-class CreateUserService
+final class CreateUserService
 {
     public function __construct(
-        private readonly UserRepositoryInterface $userRepository
+        // ...
+        private readonly EventDispatcherInterface $eventDispatcher,
     ) {}
 
-    public function createUser(array $data): void
+    public function create(UserData $dto): User
     {
-        // $user = new User();
+        $user = new User(
+            $dto->id,
+            $dto->email,
+            $dto->firstName,
+            $dto->lastName,
+            $dto->password,
+        );
+
+        $this->eventDispatcher->dispatch(new UserCreated($user));
+
+        return $user;
     }
 }

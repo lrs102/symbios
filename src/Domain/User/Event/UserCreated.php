@@ -2,21 +2,16 @@
 
 namespace App\Domain\User\Event;
 
-use App\Domain\Event\DomainEvent;
-use function Symfony\Component\Clock\now;
+use App\Domain\User\User;
 
-final readonly class UserCreated implements DomainEvent
+final readonly class UserCreated
 {
     public function __construct(
-        public string $userId,
-        public string $email
+        private readonly User $user
     ) {}
 
-    /**
-     * @throws \DateMalformedStringException
-     */
-    public function occurredAt(): \DateTimeImmutable
+    public function getUser(): User
     {
-        return now();
+        return $this->user;
     }
 }
