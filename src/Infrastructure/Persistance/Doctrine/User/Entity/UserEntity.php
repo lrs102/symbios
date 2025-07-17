@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Domain\User\Entity;
+namespace App\Infrastructure\Persistance\Doctrine\User\Entity;
 
+use App\Application\User\DTO\UserData;
 use App\Domain\Group\Entity\Group;
-use App\Infrastructure\Persistance\Doctrine\User\UserRepository;
+use App\Domain\User\User;
+use App\Infrastructure\Persistance\Doctrine\User\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-class User
+class UserEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -124,6 +126,19 @@ class User
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
+    }
+
+    public static function fromDomain(User $user): UserEntity
+    {
+        $entity = new UserEntity();
+
+        $entity->id = $user->getId();
+        $entity->email = $user->getEmail();
+        $entity->firstName = $user->getFirstName();
+        $entity->lastName = $user->getLastName();
+        $entity->password = $user->getPassword();
+
+        return $entity;
     }
 
 }

@@ -2,7 +2,7 @@
 
 namespace App\Domain\Authentication\Event\Listener;
 
-use App\Domain\User\Entity\User;
+use App\Infrastructure\Persistance\Doctrine\User\Entity\UserEntity;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
@@ -14,7 +14,7 @@ class JWTAuthenticationSuccessListener
         $data = $event->getData(); // Contains 'token'
         $user = $event->getUser();
 
-        if (!$user instanceof User) {
+        if (!$user instanceof UserEntity) {
             return;
         }
 

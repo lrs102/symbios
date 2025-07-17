@@ -3,7 +3,7 @@
 namespace App\Domain\Group\Entity;
 
 use App\Domain\Group\Repository\GroupRepository;
-use App\Domain\User\Entity\User;
+use App\Infrastructure\Persistance\Doctrine\User\Entity\UserEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -20,7 +20,7 @@ class Group
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'groups')]
+    #[ORM\ManyToMany(targetEntity: UserEntity::class, mappedBy: 'groups')]
     private Collection $users;
 
     public function __construct()

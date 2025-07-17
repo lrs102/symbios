@@ -2,18 +2,32 @@
 
 namespace App\Application\User\Service;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Messenger\MessageBusInterface;
+use App\Domain\User\Repository\UserRepositoryInterface;
+use App\Domain\User\User;
 
-readonly class UpdateUserService
+class UpdateUserService
 {
     public function __construct(
-        private EntityManagerInterface $em,
-        private MessageBusInterface    $bus
+        private readonly UserRepositoryInterface $userRepository
     ) {}
 
-    public function update(int $id, array $data)
+    public function updateUser(int $id, array $data): void
     {
-//        $user = $this->em->
+        /** @var User $user */
+        $user = $this->userRepository->findById($id);
+
+        if (!$user) {
+            throw new \DomainException("User not found");
+        }
+
+        $user->setEmail($data['email'] ?? $user->getEmail());
+        $user->setName($data['name'] ?? $user->getName());
+
+        if (!filter_var($user->getEmail(), FILTER_VALIDATE_EMAIL)) {
+            throw new \DomainException("Invalid email format");
+        }
+
+        $this->userRepository->save($user);
     }
 }
+
