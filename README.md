@@ -1,10 +1,10 @@
 # Project Name
 
-A clean, modular Symfony application designed with Domain-Driven Design (DDD) principles and scalable architectural patterns.
+Symfony app designed with Domain-Driven Design (DDD) principles and scalable architectural patterns.
 
 ## Overview
 
-This project is built with the goal of maintaining a clear separation of concerns, modular design, and maintainability. The application is structured to align with principles of DDD and Clean Architecture, organizing business logic and technical concerns in a layered fashion.
+This project is my attempt at scaffolding out a app that rigidly follows DDD's best practices. It's built with the goal of maintaining a clear separation of concerns, modular design, and maintainability.
 
 ## Project Structure
 

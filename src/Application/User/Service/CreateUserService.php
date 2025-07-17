@@ -13,7 +13,6 @@ class CreateUserService
 
     public function createUser(array $data): void
     {
-        $user = new User($data['email'], $data['password']);
-        $this->userRepository->($user);
+        // $user = new User();
     }
 }
