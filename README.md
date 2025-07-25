@@ -4,7 +4,7 @@ Symfony app designed with Domain-Driven Design (DDD) principles and scalable arc
 
 ## Overview
 
-This project is my attempt at scaffolding out a app that rigidly follows DDD's best practices. It's built with the goal of maintaining a clear separation of concerns, modular design, and maintainability.
+This project is my attempt at scaffolding out a app that rigidly follows DDD's best practices -- starting with the User domain and context and security. It's built with the goal of maintaining a clear separation of concerns, modular design, and maintainability.
 
 ## Project Structure
 
